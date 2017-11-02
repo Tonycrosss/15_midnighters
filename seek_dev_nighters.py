@@ -1,16 +1,19 @@
-# -*- coding: utf-8 -*-
 import requests
 from datetime import datetime
 
 
 def load_attempts():
-    response = requests.get('https://devman.org/api/challenges/solution_attempts/')
+    response = requests.get(
+        'https://devman.org/api/challenges/solution_attempts/')
     response_json = response.json()
     pages = response_json['number_of_pages']
     start_page = 1
     all_attempts_list = []
     for page in range(pages):
-        response_json = requests.get('https://devman.org/api/challenges/solution_attempts/?page={}'.format(start_page)).json()
+        params = {'page': '{}'.format(start_page)}
+        response_json = requests.get(
+            'https://devman.org/api/challenges/solution_attempts/',
+            params=params).json()
         all_attempts_list.append(response_json['records'])
         start_page += 1
     return all_attempts_list
@@ -24,8 +27,9 @@ def get_midnighters(attempts_info):
         utc_dt = datetime.utcfromtimestamp(record_time)
         month = int(utc_dt.strftime('%m'))
         day = int(utc_dt.strftime('%d'))
-        midnight = datetime(2017, month=month, day=day, hour=0, minute=00)
-        morning = datetime(2017, month=month, day=day, hour=9, minute=00)
+        year = 2017
+        midnight = datetime(year=year, month=month, day=day, hour=0, minute=00)
+        morning = datetime(year=year, month=month, day=day, hour=9, minute=00)
         if midnight < utc_dt < morning:
             midnighters.append(record)
     return midnighters
