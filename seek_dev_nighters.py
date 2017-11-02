@@ -15,6 +15,7 @@ def load_attempts():
     return all_attempts_list
 
 
+# TODO: сделать все месяца и дни
 def get_midnighters(response):
     midnight = datetime(2017, month=11, day=1, hour=0, minute=00)
     morning = datetime(2017, month=11, day=1, hour=9, minute=00)
