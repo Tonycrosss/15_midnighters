@@ -15,24 +15,32 @@ def load_attempts():
     return all_attempts_list
 
 
-# TODO: сделать все месяца и дни
-def get_midnighters(response):
-    midnight = datetime(2017, month=11, day=1, hour=0, minute=00)
-    morning = datetime(2017, month=11, day=1, hour=9, minute=00)
+def get_midnighters(attempts_info):
     midnighters = []
-    records = response[0]
+    records = attempts_info[0]
     for record in records:
-        print(record)
         record_time = record['timestamp']
         utc_dt = datetime.utcfromtimestamp(record_time)
+        month = int(utc_dt.strftime('%m'))
+        day = int(utc_dt.strftime('%d'))
+        midnight = datetime(2017, month=month, day=day, hour=0, minute=00)
+        morning = datetime(2017, month=month, day=day, hour=9, minute=00)
         if midnight < utc_dt < morning:
             midnighters.append(record)
     return midnighters
 
 
+def print_midnitghers(midnighters_info):
+    print('В список полуночников входят:')
+    unique_midnighters = []
+    for midnighter in midnighters_info:
+        unique_midnighters.append(midnighter['username'])
+    for midnighter in set(unique_midnighters):
+        print(midnighter)
+
+
 if __name__ == '__main__':
     attempts_info = load_attempts()
-    print(attempts_info)
     midnighters = get_midnighters(attempts_info)
-    print(midnighters)
+    print_midnitghers(midnighters)
 
