@@ -35,7 +35,7 @@ def get_midnighters(attempts_info):
     return midnighters
 
 
-def print_midnitghers(midnighters_info):
+def print_midnighters(midnighters_info):
     print('В список полуночников входят:')
     unique_midnighters = []
     for midnighter in midnighters_info:
@@ -47,5 +47,5 @@ def print_midnitghers(midnighters_info):
 if __name__ == '__main__':
     attempts_info = load_attempts()
     midnighters = get_midnighters(attempts_info)
-    print_midnitghers(midnighters)
+    print_midnighters(midnighters)
 
