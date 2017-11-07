@@ -37,10 +37,9 @@ def get_midnighters(attempts_info):
 
 def print_midnighters(midnighters_info):
     print('В список полуночников входят:')
-    unique_midnighters = []
-    for midnighter in midnighters_info:
-        unique_midnighters.append(midnighter['username'])
-    for midnighter in set(unique_midnighters):
+    unique_midnighters = set(midnighter['username'] for midnighter
+                             in midnighters_info)
+    for midnighter in unique_midnighters:
         print(midnighter)
 
 
