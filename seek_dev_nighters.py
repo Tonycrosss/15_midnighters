@@ -7,7 +7,7 @@ def load_attempts():
         'https://devman.org/api/challenges/solution_attempts/')
     response_json = response.json()
     pages = response_json['number_of_pages']
-    start_page = 1
+    current_page = 1
     all_attempts_list = []
     for page in range(pages):
         params = {'page': '{}'.format(start_page)}
@@ -15,7 +15,7 @@ def load_attempts():
             'https://devman.org/api/challenges/solution_attempts/',
             params=params).json()
         all_attempts_list.append(response_json['records'])
-        start_page += 1
+        current_page += 1
     return all_attempts_list
 
 
