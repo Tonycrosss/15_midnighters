@@ -26,7 +26,7 @@ def load_attempts():
 
 
 def get_midnighters(attempts_info):
-    midnighters = []
+    solve_attempts = []
     print(attempts_info)
     records = attempts_info
     for record in records:
@@ -38,20 +38,20 @@ def get_midnighters(attempts_info):
         midnight = datetime(year=year, month=month, day=day, hour=0, minute=00)
         morning = datetime(year=year, month=month, day=day, hour=9, minute=00)
         if midnight < utc_dt < morning:
-            midnighters.append(record)
-    return midnighters
+            solve_attempts.append(record)
+    return solve_attempts
 
 
-def print_midnighters(midnighters_info):
+def print_midnighters(solve_attempts):
     print('В список полуночников входят:')
     unique_midnighters = set(midnighter['username'] for midnighter
-                             in midnighters_info)
+                             in solve_attempts)
     for midnighter in unique_midnighters:
         print(midnighter)
 
 
 if __name__ == '__main__':
     attempts_info = load_attempts()
-    midnighters = get_midnighters(attempts_info)
-    print_midnighters(midnighters)
+    solve_attempts = get_midnighters(attempts_info)
+    print_midnighters(solve_attempts)
 
