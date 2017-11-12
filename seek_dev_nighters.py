@@ -10,7 +10,7 @@ def load_attempts():
     current_page = 1
     all_attempts_list = []
     for page in range(pages):
-        params = {'page': '{}'.format(start_page)}
+        params = {'page': '{}'.format(current_page)}
         response_json = requests.get(
             'https://devman.org/api/challenges/solution_attempts/',
             params=params).json()
