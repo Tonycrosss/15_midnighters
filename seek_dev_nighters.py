@@ -16,17 +16,22 @@ def load_attempts():
             params=params).json()
         all_attempts_list.append(response_json['records'])
         current_page += 1
-    return all_attempts_list
+    all_attempts_list_flat = [item for sublist in all_attempts_list for
+                              item in sublist]
+    # Ужасное, на мое мнение решение для объединения всех листов в один,
+    # Подскажите, как лучше сделать ?
+    return all_attempts_list_flat
 
 
 def get_midnighters(attempts_info):
     midnighters = []
-    records = attempts_info[0]
+    print(attempts_info)
+    records = attempts_info
     for record in records:
         record_time = record['timestamp']
         utc_dt = datetime.utcfromtimestamp(record_time)
-        month = int(utc_dt.strftime('%m'))
-        day = int(utc_dt.strftime('%d'))
+        month = int(utc_dt.month)
+        day = int(utc_dt.day)
         year = 2017
         midnight = datetime(year=year, month=month, day=day, hour=0, minute=00)
         morning = datetime(year=year, month=month, day=day, hour=9, minute=00)
