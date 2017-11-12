@@ -16,8 +16,8 @@ def load_attempts():
             params=params).json()
         all_attempts_list.append(response_json['records'])
         current_page += 1
-    all_attempts_list_flat = [item for sublist in all_attempts_list for
-                              item in sublist]
+    all_attempts_list_flat = [piece for sublist in all_attempts_list for
+                              piece in sublist]
     # Ужасное, на мое мнение решение для объединения всех листов в один,
     # Подскажите, как лучше сделать ?
     # По поводу гет запроса - там же 10 страниц, вот 10 обращений и идет
