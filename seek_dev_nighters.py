@@ -10,7 +10,7 @@ def load_attempts():
     current_page = 1
     all_attempts_list = []
     for page in range(pages):
-        params = {'page': '{}'.format(current_page)}
+        params = {'page': str(current_page)}
         response_json = requests.get(
             'https://devman.org/api/challenges/solution_attempts/',
             params=params).json()
@@ -18,16 +18,11 @@ def load_attempts():
         current_page += 1
     all_attempts_list_flat = [piece for sublist in all_attempts_list for
                               piece in sublist]
-    # Ужасное, на мое мнение решение для объединения всех листов в один,
-    # Подскажите, как лучше сделать ?
-    # По поводу гет запроса - там же 10 страниц, вот 10 обращений и идет
-    # перечитал либу всю и стаковерфлоу, везде циклом вытаскивают
     return all_attempts_list_flat
 
 
 def get_midnighters(attempts_info):
     solve_attempts = []
-    print(attempts_info)
     records = attempts_info
     for record in records:
         record_time = record['timestamp']
