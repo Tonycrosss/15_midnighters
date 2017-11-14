@@ -14,11 +14,9 @@ def load_attempts():
         response_json = requests.get(
             'https://devman.org/api/challenges/solution_attempts/',
             params=params).json()
-        all_attempts_list.append(response_json['records'])
+        all_attempts_list.extend(response_json['records'])
         current_page += 1
-    all_attempts_list_flat = [piece for sublist in all_attempts_list for
-                              piece in sublist]
-    return all_attempts_list_flat
+    return all_attempts_list
 
 
 def get_midnighters(attempts_info):
