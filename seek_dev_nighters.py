@@ -5,10 +5,14 @@ from datetime import time
 
 
 def load_attempts():
-    current_page = 1
     all_attempts_list = []
-    pages_quantity = 10
+    response_json = requests.get(
+    'https://devman.org/api/challenges/solution_attempts/1').json()
+    all_attempts_list.extend(response_json['records'])
+    pages_quantity = response_json['number_of_pages'] - 1
+    current_page = 2
     for page in range(pages_quantity):
+        print(current_page)
         params = {'page': str(current_page)}
         response_json = requests.get(
             'https://devman.org/api/challenges/solution_attempts/',
